@@ -30,7 +30,8 @@ class Erlgen
       mkdir_in_target 'include'
       output_template_in_target 'application.app', File.join('ebin', "#{@project_name}.app")
       output_template_in_target 'application.erl', File.join('src', "#{@project_name}.erl")
-      output_template_in_target 'application_sup.erl', File.join('src', "#{@project_name}_sup.erl")
+      output_template_in_target 'application_sup.erl', File.join('src', "#{@project_name}_sup.erl") 
+      output_template_in_target 'Rakefile'
     end
     
     def target_dir

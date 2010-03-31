@@ -4,6 +4,7 @@ class Erlgen
     def initialize(*args)
       require 'optparse'
       require 'fileutils'
+      require 'erb'
       @opts = OptionParser.new do |o|
         o.on('--with-git', 'initialize git repository') do
           @options[:with_git] = true
@@ -27,6 +28,9 @@ class Erlgen
       mkdir_in_target 'ebin'
       mkdir_in_target 'priv'
       mkdir_in_target 'include'
+      output_template_in_target 'application.app', File.join('ebin', "#{@project_name}.app")
+      output_template_in_target 'application.erl', File.join('src', "#{@project_name}.erl")
+      output_template_in_target 'application_sup.erl', File.join('src', "#{@project_name}_sup.erl")
     end
     
     def target_dir

@@ -26,6 +26,7 @@ Gem::Specification.new do |s|
      "Rakefile",
      "VERSION",
      "bin/erlgen",
+     "erlgen.gemspec",
      "lib/erlgen.rb",
      "lib/erlgen/generator.rb",
      "lib/erlgen/templates/Rakefile",

@@ -5,16 +5,35 @@ class Erlgen
       require 'optparse'
       require 'fileutils'
       require 'erb'
+      @options = {}
       @opts = OptionParser.new do |o|
+        o.banner = "Usage: #{File.basename($0)} [options] appname\ne.g. #{File.basename($0)} superapp"
         o.on('--with-git', 'initialize git repository') do
           @options[:with_git] = true
         end
+
+        o.on_tail('-h', '--help', 'display this help and exit') do
+          @options[:show_help] = true
+        end
       end
       @opts.parse!(args)
+      
       @project_name = args.shift
+
+     
     end
 
     def run
+      if @options[:show_help]
+        $stderr.puts @opts
+        return 1
+      end
+
+      if @project_name.nil? || @project_name.squeeze.strip == ""
+        $stderr.puts @opts
+        return 1
+      end
+
       create_files
     end
 

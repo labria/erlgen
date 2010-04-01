@@ -7,7 +7,6 @@ class Erlgen
   class Generator
     attr_accessor :project_name, :options
     def initialize(*args)
-
       @options = {}
       @opts = OptionParser.new do |o|
         o.banner = "Usage: #{File.basename($0)} [options] appname\ne.g. #{File.basename($0)} superapp"
@@ -20,10 +19,7 @@ class Erlgen
         end
       end
       @opts.parse!(args)
-      
       @project_name = args.shift
-
-     
     end
 
     def run
@@ -58,6 +54,7 @@ class Erlgen
       output_template_in_target 'application.erl', File.join('src', "#{@project_name}.erl")
       output_template_in_target 'application_sup.erl', File.join('src', "#{@project_name}_sup.erl") 
       output_template_in_target 'Rakefile'
+      touch_in_target File.join('include', "#{@project_name}.hrl")
     end
     
     def target_dir
@@ -84,6 +81,12 @@ class Erlgen
 
       File.open(final_destination, 'w') {|file| file.write(template_result)}
 
+      $stdout.puts "\tcreate\t#{destination}"
+    end
+    
+    def touch_in_target(destination)
+      final_destination = File.join(target_dir, destination)
+      FileUtils.touch  final_destination
       $stdout.puts "\tcreate\t#{destination}"
     end
 

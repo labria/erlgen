@@ -5,7 +5,7 @@
 
 Gem::Specification.new do |s|
   s.name = %q{erlgen}
-  s.version = "0.0.1"
+  s.version = "0.0.2"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Dimitri Krassovski"]
@@ -33,6 +33,9 @@ Gem::Specification.new do |s|
      "lib/erlgen/templates/application.app",
      "lib/erlgen/templates/application.erl",
      "lib/erlgen/templates/application_sup.erl",
+     "lib/erlgen/templates/gen_event.erl",
+     "lib/erlgen/templates/gen_fsm.erl",
+     "lib/erlgen/templates/gen_server.erl",
      "spec/erlgen_spec.rb",
      "spec/spec.opts",
      "spec/spec_helper.rb"

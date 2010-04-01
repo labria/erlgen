@@ -1,6 +1,11 @@
 = erlgen
 
-Description goes here.
+erlgen is a Erlang application generator. It generates the basic application layout with some simple files to build upon.
+
+== Planned features:
+
+* Include rake tasks (or command line arguments) to generate default gen_server, gen_fsm, etc. modules.
+* Option to choose between Rake/Make/Emake.
 
 == Note on Patches/Pull Requests
  

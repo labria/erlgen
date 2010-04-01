@@ -5,10 +5,13 @@ erlgen is a Erlang application generator. It generates the basic application lay
 
 == Usage
 
-The basic command is `erlgen projectname` to generate a skeleton erlang project named **projectname**. The command-line options include:
-* `--with-git` initializes a git repository in the project folder (does not commit anything).
-* `--gen_server`/`--gen_fsm`/`--gen_event` instead of generating a application, generates a skeleton gen_server/fsm/event module with the name specified. If you're in the root of your project, it will write the fiel to the _src_ directory. If not, it will write it to the current directory.
-* `--help` reminds you about the options.
+The basic command is erlgen projectname to generate a skeleton erlang project named **projectname**. The command-line options include:
+  --with-git
+initializes a git repository in the project folder (does not commit anything).
+  --gen_server/--gen_fsm/--gen_event
+instead of generating a application, generates a skeleton gen_server/fsm/event module with the name specified. If you're in the root of your project, it will write the fiel to the _src_ directory. If not, it will write it to the current directory.
+  --help 
+reminds you about the options.
 
 == Planned features:
 

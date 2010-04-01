@@ -1,7 +1,8 @@
 require 'optparse'
 require 'fileutils'
 require 'erb'
-require 'git'
+require 'date'
+#require 'git'
 
 class Erlgen
   class Generator
@@ -13,6 +14,22 @@ class Erlgen
         o.on('--with-git', 'initialize git repository') do
           @options[:with_git] = true
         end
+
+        o.on('--gen_server', 'create a skeleton gen_server module') do
+          @options[:file_only] = true
+          @options[:gen] = "gen_server"
+        end
+
+        o.on('--gen_fsm', 'create a skeleton gen_fsm module') do
+          @options[:file_only] = true
+          @options[:gen] = "gen_fsm"
+        end
+
+        o.on('--gen_event', 'create a skeleton gen_event module') do
+          @options[:file_only] = true
+          @options[:gen] = "gen_event"
+        end
+
 
         o.on_tail('-h', '--help', 'display this help and exit') do
           @options[:show_help] = true
@@ -32,8 +49,12 @@ class Erlgen
         $stderr.puts @opts
         return 1
       end
-
-      create_files
+      
+      if @options[:file_only]
+        create_gen
+      else
+        create_files
+      end
 
       if @options[:with_git]
         create_version_control
@@ -57,8 +78,12 @@ class Erlgen
       touch_in_target File.join('include', "#{@project_name}.hrl")
     end
     
+    def create_gen
+       output_template_in_target "#{@options[:gen]}.erl", "#{@project_name}.erl"
+    end
+
     def target_dir
-      @project_name
+      @options[:file_only] ? (Dir['*'].include?('src') ? 'src' : Dir.pwd) : @project_name
     end
 
     def mkdir_in_target(directory)

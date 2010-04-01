@@ -2,9 +2,16 @@
 
 erlgen is a Erlang application generator. It generates the basic application layout with some simple files to build upon.
 
+
+== Usage
+
+The basic command is `erlgen projectname` to generate a skeleton erlang project named **projectname**. The command-line options include:
+* `--with-git` initializes a git repository in the project folder (does not commit anything).
+* `--gen_server`/`--gen_fsm`/`--gen_event` instead of generating a application, generates a skeleton gen_server/fsm/event module with the name specified. If you're in the root of your project, it will write the fiel to the _src_ directory. If not, it will write it to the current directory.
+* `--help` reminds you about the options.
+
 == Planned features:
 
-* Include rake tasks (or command line arguments) to generate default gen_server, gen_fsm, etc. modules.
 * Option to choose between Rake/Make/Emake.
 
 == Note on Patches/Pull Requests
@@ -16,6 +23,11 @@ erlgen is a Erlang application generator. It generates the basic application lay
 * Commit, do not mess with rakefile, version, or history.
   (if you want to have your own version, that is fine but bump version in a commit by itself I can ignore when I pull)
 * Send me a pull request. Bonus points for topic branches.
+
+== Thanks
+
+I would like to thank the authors of the jeweler gem, lots of code in this gem comes from their work.
+
 
 == Copyright
 

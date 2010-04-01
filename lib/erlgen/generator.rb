@@ -1,10 +1,13 @@
+require 'optparse'
+require 'fileutils'
+require 'erb'
+require 'git'
+
 class Erlgen
   class Generator
     attr_accessor :project_name, :options
     def initialize(*args)
-      require 'optparse'
-      require 'fileutils'
-      require 'erb'
+
       @options = {}
       @opts = OptionParser.new do |o|
         o.banner = "Usage: #{File.basename($0)} [options] appname\ne.g. #{File.basename($0)} superapp"
@@ -35,6 +38,10 @@ class Erlgen
       end
 
       create_files
+
+      if @options[:with_git]
+        create_version_control
+      end
     end
 
     def create_files
@@ -83,6 +90,17 @@ class Erlgen
     def template_dir
       File.join(File.dirname(__FILE__), 'templates')
     end
+      
+    def create_version_control
+      Dir.chdir(target_dir) do
+        begin
+          @repo = Git.init()
+        rescue Git::GitExecuteError => e
+          raise GitInitFailed, "Encountered an error during gitification. Maybe the repo already exists, or has already been pushed to?"
+        end
+      end
+    end
+
 
   end
 end
